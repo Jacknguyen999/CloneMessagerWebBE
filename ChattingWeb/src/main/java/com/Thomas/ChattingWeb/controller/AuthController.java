@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import request.LoginRequest;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
@@ -49,6 +49,7 @@ public class AuthController {
         String email = user.getEmail();
         String fullname = user.getFull_name();
         String password = user.getPassword();
+        String profile_pic = user.getProfile_pic();
 
         User isUser = userRepository.findByEmail(email);
         if ( isUser != null ){
@@ -60,8 +61,9 @@ public class AuthController {
         createdUser.setEmail(email);
         createdUser.setFull_name(fullname);
         createdUser.setPassword(passwordEncoder.encode(password));
+        createdUser.setProfile_pic(profile_pic);
 
-        User savedUser = userRepository.save(createdUser);
+        userRepository.save(createdUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(email,password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -69,6 +71,7 @@ public class AuthController {
         String jwt = jwtProvider.generateToken(authentication);
 
         AuthResponse res = new AuthResponse(jwt,true);
+
         return ResponseEntity.ok(res);
 
     }

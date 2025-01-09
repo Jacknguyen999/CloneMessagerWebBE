@@ -5,13 +5,11 @@ import com.Thomas.ChattingWeb.Exception.UserException;
 import com.Thomas.ChattingWeb.config.JwtProvider;
 import com.Thomas.ChattingWeb.model.User;
 import com.Thomas.ChattingWeb.repository.UserRepository;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import request.UpdateUserRequest;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,8 +42,11 @@ public class UserServiceImplement implements UserService {
         if (req.getFull_name() != null){
             user.setFull_name(req.getFull_name());
         }
+        if (req.getProfile_picture() != null){
+            user.setProfile_pic(req.getProfile_picture());
+        }
 
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
@@ -64,7 +65,7 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public List<User> searchUser(String keyword) {
-        List<User> users = userRepository.searchUser(keyword);
-        return users;
+        List<User> user = userRepository.searchUser(keyword);
+        return user;
     }
 }
