@@ -47,7 +47,7 @@ public class AuthController {
     ) throws UserException {
 
         String email = user.getEmail();
-        String fullname = user.getFull_name();
+        String full_name = user.getFull_name();
         String password = user.getPassword();
         String profile_pic = user.getProfile_pic();
 
@@ -59,7 +59,7 @@ public class AuthController {
 
         User createdUser = new User();
         createdUser.setEmail(email);
-        createdUser.setFull_name(fullname);
+        createdUser.setFull_name(full_name);
         createdUser.setPassword(passwordEncoder.encode(password));
         createdUser.setProfile_pic(profile_pic);
 

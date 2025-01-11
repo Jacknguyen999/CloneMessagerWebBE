@@ -1,5 +1,6 @@
 package com.Thomas.ChattingWeb.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,11 @@ public class Chat {
     private String chat_image;
 
 
+    @ManyToMany
+    private Set<User> admin = new HashSet<>();
+
+
+
     @JoinColumn(name = "is_group")
     private boolean isGroup;
 
@@ -37,7 +43,8 @@ public class Chat {
     private Set<User> users = new HashSet<>();
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "chat")
+//    @JsonManagedReference
     private List<Message> messages = new ArrayList<>();
 
 

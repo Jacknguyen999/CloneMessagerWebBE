@@ -37,7 +37,7 @@ public class UserController {
     )
     {
         List<User> users = userService.searchUser(key);
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @PutMapping("/update")
